@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>TicTacToe</title>
+    <link rel="stylesheet" type="text/css" href="../static/style.css" />
+</head>
+
+<body>
+    <center>
+        {% if size == 0 %}
+        <form action="{{ url_for('index') }}" method="POST">
+            <input name="size" type="text" />
+            <input name="submit" value="Submit" type="submit" />
+        </form>
+        {% else %}
+        <table>
+            {% for i in range(size) %}
+            <tr>
+                {% for j in range(size) %}
+                <td>
+                    {% if board[i][j] %}
+                    {{ board[i][j] }}
+                    {% else %}
+                    <a href="{{ url_for('play', row=i, col=j) }}">Play!</a>
+                    {% endif %}
+                </td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </table>
+        {% endif %}
+        <hr />
+        <p>{{ message }}</p>
+        <a href="{{ url_for('reset') }}">Reset Game</a>
+    </center>
+
+</body>
+
+</html>
